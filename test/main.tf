@@ -1,11 +1,17 @@
-data "google_cloudfunctions_function" "my-function" {
-  name = "list_running_instances"
-}
+# data "google_cloudfunctions_function" "my-function" {
+#   name = "list_running_instances"
+# }
 	
-output "bucket_name" {
-  value = data.google_cloudfunctions_function.my-function.id
-}
+# output "bucket_name" {
+#   value = data.google_cloudfunctions_function.my-function.id
+# }
+resource "google_storage_bucket" "auto-expire" {
+  name          = "no-public-access-bucket"
+  location      = "US"
+  force_destroy = true
 
+  public_access_prevention = "enforced"
+}
 terraform {
   required_version = ">= 0.13"
   required_providers {
@@ -21,6 +27,6 @@ terraform {
 
 provider "google" {
   project = "cloudside-academy"
-  region = "asia-south1"
-  zone = "asia-south1-a"
+  region = "us-central1"
+  zone = "us-central1-a"
 }
