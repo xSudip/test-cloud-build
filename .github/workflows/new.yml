@@ -1,0 +1,53 @@
+name: Terraform
+
+on:
+  workflow_dispatch:
+    inputs:
+      Action:
+        type: choice
+        description: Choose the Terraform Action
+        options: 
+        - PLAN
+        - APPLY
+
+
+jobs:
+  terraform:
+    name: 'Terraform Init'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./test
+    steps:
+        - name: Checkout
+          uses: actions/checkout@v3
+
+        - name: Setup Terraform
+          uses: hashicorp/setup-terraform@v1
+        
+        - name: Terraform Init
+          run: terraform init
+          env:
+            GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_KEY }}
+
+
+  terraform-plan:
+    name: 'Terraform Plan'
+    runs-on: ubuntu-latest
+    environment: production
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./test
+    steps:
+        - name: Checkout
+          uses: actions/checkout@v3
+        
+        - name: Setup Terraform
+          uses: hashicorp/setup-terraform@v1
+        
+        - name: Terraform Plan
+          run: terraform plan
+          env:
+            GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_KEY }}
