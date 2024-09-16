@@ -26,14 +26,16 @@ jobs:
         - name: Setup Terraform
           uses: hashicorp/setup-terraform@v1
         
-        - name: Terraform Init
-          run: terraform init
+        - name: Terraform Plan
+          run: |
+            terraform init
+            terraform plan
           env:
             GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_KEY }}
 
 
-  terraform-plan:
-    name: 'Terraform Plan'
+  terraform-apply:
+    name: 'Terraform Apply'
     runs-on: ubuntu-latest
     environment: production
     defaults:
@@ -47,7 +49,9 @@ jobs:
         - name: Setup Terraform
           uses: hashicorp/setup-terraform@v1
         
-        - name: Terraform Plan
-          run: terraform plan
+        - name: Terraform Apply
+          run: |
+            terraform init
+            terraform apply
           env:
             GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_KEY }}

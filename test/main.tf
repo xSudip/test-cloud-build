@@ -12,6 +12,7 @@ resource "google_storage_bucket" "auto-expire" {
 
   public_access_prevention = "enforced"
 }
+
 terraform {
   required_version = ">= 0.13"
   required_providers {
