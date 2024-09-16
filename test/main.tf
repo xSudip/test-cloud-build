@@ -6,7 +6,7 @@
 #   value = data.google_cloudfunctions_function.my-function.id
 # }
 resource "google_storage_bucket" "auto-expire" {
-  name          = "no-public-access-bucket"
+  name          = "no-bucket-269sudip"
   location      = "US"
   force_destroy = true
 
