@@ -25,18 +25,18 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: ${ { inputs.Resource } }
+        working-directory: ${ { github.event.inputs.Resource } }
     steps:
         - name: Checkout
-          if:  inputs.Action == 'PLAN'
+          if:  github.event.inputs.Action == 'PLAN'
           uses: actions/checkout@v3
 
         - name: Setup Terraform
-          if:  inputs.Action == 'PLAN'
+          if:  github.event.inputs.Action == 'PLAN'
           uses: hashicorp/setup-terraform@v1
         
         - name: Terraform Plan
-          if:  inputs.Action == 'PLAN'
+          if:  github.event.inputs.Action == 'PLAN'
           run: |
             terraform init
             terraform plan
@@ -51,18 +51,18 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: ${ { inputs.Resource } }
+        working-directory: ${ { github.event.inputs.Resource } }
     steps:
         - name: Checkout
-          if:  inputs.Action == 'APPLY'
+          if:  github.event.inputs.Action == 'APPLY'
           uses: actions/checkout@v3
         
         - name: Setup Terraform
-          if:  inputs.Action == 'APPLY'
+          if:  github.event.inputs.Action == 'APPLY'
           uses: hashicorp/setup-terraform@v1
         
         - name: Terraform Apply
-          if:  inputs.Action == 'APPLY'
+          if:  github.event.inputs.Action == 'APPLY'
           run: |
             terraform init
             terraform apply --auto-approve
