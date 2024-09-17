@@ -38,7 +38,7 @@ jobs:
         - name: Terraform Plan
           if:  github.event.inputs.Action == 'PLAN'
           run: |
-            echo "${ { github.event.inputs.Resource } }"
+            echo "${{ github.event.inputs.Resource }}"
             terraform init
             terraform plan
           env:
@@ -52,7 +52,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: "./${ { github.event.inputs.Resource } }"
+        working-directory: "./${{ github.event.inputs.Resource }}"
     steps:
         - name: Checkout
           if:  github.event.inputs.Action == 'APPLY'
