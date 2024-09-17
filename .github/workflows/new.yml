@@ -25,7 +25,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: ${{ github.event.inputs.Resource }}
+        working-directory: ${{ github.event.inputs.Resource }}/text
     steps:
         - name: Checkout
           if:  github.event.inputs.Action == 'PLAN'
@@ -38,9 +38,7 @@ jobs:
         - name: Terraform Plan
           if:  github.event.inputs.Action == 'PLAN'
           run: |
-            echo "${{ github.event.inputs.Resource }}"
-            terraform init
-            terraform plan
+            cat hello.txt
           env:
             GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_KEY }}
 
