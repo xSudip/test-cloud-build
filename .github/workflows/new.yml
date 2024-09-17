@@ -25,7 +25,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: ./test
+        working-directory: ${{ github.event.inputs.Resource }}
     steps:
         - name: Checkout
           if:  github.event.inputs.Action == 'PLAN'
@@ -52,7 +52,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: "./${{ github.event.inputs.Resource }}"
+        working-directory: ${{ github.event.inputs.Resource }}
     steps:
         - name: Checkout
           if:  github.event.inputs.Action == 'APPLY'
